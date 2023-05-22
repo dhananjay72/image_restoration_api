@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+
+    <title>Image Restoration Using Stochastic Differential Equation</title>
+    <style>
+
+    </style>
+</head>
+
+<body>
+    <div class="image-container">
+        <img src="../static/logo.png" alt="" srcset="" class="image">
+    </div>
+    <div class="main-heading">
+
+        <h2>Image Restoration Using MR-SDE</h2>
+    </div>
+
+    {% if filename %}
+    <div class="center-box">
+        <div class="image-box">
+            <p>Original Image</p>
+            <img src="{{ url_for('static',filename='images'+filename)}}" style="width: 400px">
+        </div>
+        {% endif %}
+        {% if restored_img_url %}
+        <div class="image-box">
+            <p>Restored Image</p>
+            <!-- <a href="{{ restored_img_url}}" target="_blank"><img src="{{ restored_img_url}}" style="width: 400px"></a> -->
+            <a href="../static/output/output.png" target="_blank"><img src="../static/output/output.png"
+                    style="width: 400px"></a>
+        </div>
+        {% endif %}
+    </div>
+
+    {% if restored_img_url %}
+    <div class="submit-button">
+        <button class="download-button" onclick="window.open(`../static/output/output.png`, '_blank' )">Download
+            Restored
+            Image</button>
+    </div>
+    {% endif %}
+
+    <form method="post" action="/" enctype="multipart/form-data">
+        <p>
+            <input type="file" name="file" autocomplete="off" required>
+        </p>
+        <p>
+            <select name="selectedFeature" id="selectedFeature">
+                <option value="1">Image Deblurring</option>
+                <option value="2">Image Denoising</option>
+                <option value="3">Image Dehazing</option>
+                <option value="4">Image Deraining</option>
+            </select>
+        </p>
+
+        <p>
+            <input type="submit" value="Submit">
+        </p>
+    </form>
+    <div class="footer">
+
+    </div>
+</body>
+
+</html>
